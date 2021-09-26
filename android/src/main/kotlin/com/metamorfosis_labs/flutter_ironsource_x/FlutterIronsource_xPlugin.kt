@@ -106,6 +106,8 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
 
  IronSource.init(mActivity, appKey)
  
+  }
+ 
  
  
  
