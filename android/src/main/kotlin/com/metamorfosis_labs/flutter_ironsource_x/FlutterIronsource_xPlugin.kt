@@ -103,8 +103,7 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
 //     IronSource.init(mActivity, appKey, IronSource.AD_UNIT.OFFERWALL, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.BANNER)
 
 System.out.println("initializing starting app id is hh "+appKey);  
-// IronSource.init(mActivity, appKey);
-    IronSource.init(mActivity, appKey, IronSource.AD_UNIT.Home_Screen); 
+ IronSource.init(mActivity, appKey);
   }// Interstitial Listener
 
   override fun onInterstitialAdClicked() {
