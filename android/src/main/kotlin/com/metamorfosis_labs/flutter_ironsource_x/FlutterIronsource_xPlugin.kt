@@ -100,7 +100,10 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
     else
       IronSource.setMetaData("do_not_sell", "true")
 
-    IronSource.init(mActivity, appKey, IronSource.AD_UNIT.OFFERWALL, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.BANNER)
+//     IronSource.init(mActivity, appKey, IronSource.AD_UNIT.OFFERWALL, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.BANNER)
+
+System.out.println("initializing starting app id is "+appKey);  
+IronSource.init(mActivity, appKey);
   }// Interstitial Listener
 
   override fun onInterstitialAdClicked() {
