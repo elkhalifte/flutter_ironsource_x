@@ -52,7 +52,7 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
       IronSource.loadInterstitial()
       result.success(null)
     } else if (call.method == IronSourceConsts.SHOW_INTERSTITIAL) {
-      IronSource.showInterstitial()
+      IronSource.showInterstitial('Home_Screen')
       result.success(null)
     } else if (call.method == IronSourceConsts.IS_INTERSTITIAL_READY) {
       result.success(IronSource.isInterstitialReady())
