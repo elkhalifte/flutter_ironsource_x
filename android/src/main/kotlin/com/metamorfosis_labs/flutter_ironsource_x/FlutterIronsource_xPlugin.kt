@@ -49,7 +49,7 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
       initialize(call.argument<String>("appKey")!!, call.argument<Boolean>("gdprConsent")!!, call.argument<Boolean>("ccpaConsent")!!)
       result.success(null)
     } else if (call.method == IronSourceConsts.LOAD_INTERSTITIAL) {
-      IronSource.loadInterstitial()
+      IronSource.loadInterstitial();
       result.success(null)
     } else if (call.method == IronSourceConsts.SHOW_INTERSTITIAL) {
       IronSource.showInterstitial('Home_Screen')
@@ -93,6 +93,8 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
     IronSource.setInterstitialListener(this)
     IronSource.setRewardedVideoListener(this)
     IronSource.setOfferwallListener(this)
+     val advertisingId = IronSource.getAdvertiserId(mActivity)
+     IronSource.setUserId(userId)
     SupersonicConfig.getConfigObj().clientSideCallbacks = true
     IronSource.setConsent(gdprConsent)
     if (ccpaConsent)
@@ -102,8 +104,47 @@ class FlutterIronsource_xPlugin() : FlutterPlugin, MethodCallHandler, ActivityAw
 
 //     IronSource.init(mActivity, appKey, IronSource.AD_UNIT.OFFERWALL, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.BANNER)
 
-System.out.println("initializing starting app id is hh "+appKey);  
- IronSource.init(mActivity, appKey);
+ IronSource.init(mActivity, appKey)
+ 
+ 
+ 
+ 
+     // --------- IronSource Offerwall Listener ---------
+    override fun onOfferwallAvailable(available: Boolean) {
+        handleOfferwallButtonState(available)
+    }
+
+    override fun onOfferwallOpened() {
+        // called when the offerwall has opened
+        Log.d(TAG, "onOfferwallOpened")
+    }
+
+    override fun onOfferwallShowFailed(ironSourceError: IronSourceError) {
+        // called when the offerwall failed to show
+        // you can get the error data by accessing the IronSourceError object
+        // IronSourceError.getErrorCode();
+        // IronSourceError.getErrorMessage();
+        Log.d(TAG, "onOfferwallShowFailed $ironSourceError")
+    }
+
+    override fun onOfferwallAdCredited(credits: Int, totalCredits: Int, totalCreditsFlag: Boolean): Boolean {
+        Log.d(TAG, "onOfferwallAdCredited credits:$credits totalCredits:$totalCredits totalCreditsFlag:$totalCreditsFlag")
+        return false
+    }
+
+    override fun onGetOfferwallCreditsFailed(ironSourceError: IronSourceError) {
+        // you can get the error data by accessing the IronSourceError object
+        // IronSourceError.getErrorCode();
+        // IronSourceError.getErrorMessage();
+        Log.d(TAG, "onGetOfferwallCreditsFailed $ironSourceError")
+    }
+
+    override fun onOfferwallClosed() {
+        // called when the offerwall has closed
+        Log.d(TAG, "onOfferwallClosed")
+    }
+
+   
   }// Interstitial Listener
 
   override fun onInterstitialAdClicked() {
